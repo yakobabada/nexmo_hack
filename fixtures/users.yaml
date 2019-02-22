@@ -1,0 +1,6 @@
+App\Entity\User:
+    user:
+      firstName: Yakob
+      lastName: Abada
+      email: yakob.abada@gmail.com
+      phoneNumber: '447492583611'
