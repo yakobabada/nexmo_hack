@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ScheduleController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>Conference schedule ✅</h1>
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Time</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Speaker</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for talk in talks %}
+            <tr>
+                <th scope="row">{{ talk.talk_title }}</th>
+                <td>{{ talk.start_date|date('Y-m-d H:i') }}</td>
+                <td>{{ talk.duration }} min</td>
+                <td>
+                    {% for speaker in talk.speakers %}
+                        {{ speaker.speaker_name }}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

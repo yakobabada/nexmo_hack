@@ -8,6 +8,7 @@ use Nexmo\Client\Exception\Request;
 use Nexmo\Client\Exception\Server;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SendMessageController extends AbstractController
 {
@@ -25,7 +26,8 @@ class SendMessageController extends AbstractController
         try {
             $userNotification->notifyBySms(
                 'Nexmo',
-                'Nexmo is happy to send conference schedule http://api.joind.in/v2.1/events/7001/talks'
+                'Nexmo is happy to send conference schedule ' .
+                    $this->generateUrl('schedule', [], UrlGeneratorInterface::ABSOLUTE_URL)
             );
         } catch (Server | Request | Exception $exception) {
             $errorMessage = $exception->getMessage();

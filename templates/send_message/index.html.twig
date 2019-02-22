@@ -11,13 +11,13 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        {% if errorMessage is null %}
-            <li>Message has been sent successfully</li>
-        {% else %}
-            <li>{{ errorMessage }}</li>
-        {% endif %}
-    </ul>
+    {% if errorMessage is null %}
+        <div class="alert alert-success" role="alert">Message has been sent successfully</div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+        </div>
+
+    {% endif %}
 </div>
 {% endblock %}
