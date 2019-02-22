@@ -12,9 +12,21 @@ class UserNotification
      */
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /**
+     * @var string
+     */
+    private $nexmoId;
+
+    /**
+     * @var string
+     */
+    private $nexmoSecret;
+
+    public function __construct(EntityManagerInterface $entityManager, string $nexmoId, string $nexmoSecret)
     {
         $this->entityManager = $entityManager;
+        $this->nexmoId = $nexmoId;
+        $this->nexmoSecret = $nexmoSecret;
     }
 
     /**
@@ -30,7 +42,7 @@ class UserNotification
         $users = $this->entityManager->getRepository(User::class)->findAll();
 
         foreach ($users as $user) {
-            $basic  = new \Nexmo\Client\Credentials\Basic('01b83185', 'CKhZzEgqY6wxLPXM');
+            $basic  = new \Nexmo\Client\Credentials\Basic($this->nexmoId, $this->nexmoSecret);
             $client = new \Nexmo\Client($basic);
 
             $client->message()->send([
